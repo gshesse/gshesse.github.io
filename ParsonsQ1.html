@@ -13,52 +13,60 @@
 		<p>Construct the program by draging the code lines into the solution area on the right.  
 		Press the feedback button to check whether your code is correct.</p>
 		
-		<div id="sortableTrash" class="sortable-code"></div>
-        <div id="sortable" class="sortable-code">
+		<!-- These are the elements which hold the line of code -->
+		<div id="parsons-source" class="sortable-code"></div>
+        <div id="parsons-target" class="sortable-code"></div>
         
-      
-        <!-- These are the elements which will include the lines of code -->
-        <div id="jsparsons-source" class="sortable-code"></div>
-        <div id="jsparsons-target" class="sortable-code"></div>
-        
+ 
         <!-- Links to reset the assignment and to get feedback -->
         <div style="clear:both;"></div>
         <p>
             <a href="#" id="newInstanceLink">New instance</a>
             <a href="#" id="feedbackLink">Get feedback</a>
         </p>
-        
+        <div style="clear:both;"></div>
+        <div id="feedback"></div>
+		
         <!-- Load the JavaScript files required -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+        <script src="./lib/jquery.min.js"></script>
+        <script src="./lib/jquery-ui.min.js"></script>
+        <script src="./lib/jquery.ui.touch-punch.min.js"></script>
         <script src="./lib/underscore-min.js"></script>
         <script src="./lib/lis.js"></script>
         <script src="./lib/parsons.js"></script>
         <script>
-			var question = 	"age = input('Enter you age')\n" +
+			var question = 	"age = input(Enter you age')\n" +
 							"if age <18 :\n" + 
 							"	print('CHILD')\n" + 
 							"else\n" + 
 							"	print('ADULT')\n";
 			
 			function displayErrors(fb){
+				
+				var feedback_div = document.querySelector("#feedback");
 				if(fb.errors.length > 0){
 					alert(fb.errors[0]);
-				}				
+					feedback_div.innerHTML = fb.errors[0];
+				} else {
+					feedback_div.innerHTML = "";
+				}
+				
 			}
 			
 			$(document).ready(function(){
             var parson = new ParsonsWidget({
-                'sortableId': 'sortable',
-                'trashId': 'sortableTrash',
+                'sortableId': 'parsons-target',
+                'trashId': 'parsons-source',
                 'max_wrong_lines': 1,
                 'feedback_cb' : displayErrors
             });
-            parson.init(initial);
+            parson.init(question);
             parson.shuffleLines();
             $("#newInstanceLink").click(function(event){
                 event.preventDefault();
                 parson.shuffleLines();
+				document.querySelector("#feedback").innerHTML="";
+				
             });
             $("#feedbackLink").click(function(event){
                 event.preventDefault();
