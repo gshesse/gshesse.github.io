@@ -25,24 +25,27 @@
 	  /* useful page for explaining event listeners
 	  https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events
 	  */
+	  
+	  // create a single random color for the backround of the div element
       // create 16 div elements and add to the document
+	  var r = random(255);
+	  var g = random(255);
+	  var b = random(255);
+	  const rndCol = 'rgb(' + r + ',' + g + ',' + b + ')';
+			
 	  for (let i=0; i<80;i++){
 		var div = document.createElement('div');
-		var r = random(255);
-		var g = random(255);
-		var b = random(255);
 		
-		r=255;
-		g=255;
-		b=255;
-		const rndCol = 'rgb(' + r + ',' + g + ',' + b + ')';
 		div.style.backgroundColor = rndCol;
 		div.addEventListener('mouseover', eChange);
 		document.body.appendChild(div);	
 	  }
 	  
 	  const btn = document.querySelector('button');
-
+	  
+	  // run the random background code at the start
+	  bgChange();
+	  
       function random(number) {
         return Math.floor(Math.random()*number);
       }
@@ -56,7 +59,7 @@
         return 'rgb(' + r + ',' + g + ',' + b + ')';
 	  }
 */		
-      function bgChange(e) {
+      function bgChange() {
 		var r = random(255);
 		var g = random(255);
 		var b = random(255);
