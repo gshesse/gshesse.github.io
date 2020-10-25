@@ -9,9 +9,10 @@
       button {
         margin: 10px;
       }
-	  div { height:100px;
-			width:25%;
-			display:block;
+	  div { height:40px;
+			width:10%;
+			float:left;
+			display:block;	
 	  }
 	  
     </style>
@@ -25,11 +26,15 @@
 	  https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events
 	  */
       // create 16 div elements and add to the document
-	  for (let i=0; i<4;i++){
+	  for (let i=0; i<80;i++){
 		var div = document.createElement('div');
 		var r = random(255);
 		var g = random(255);
 		var b = random(255);
+		
+		r=255;
+		g=255;
+		b=255;
 		const rndCol = 'rgb(' + r + ',' + g + ',' + b + ')';
 		div.style.backgroundColor = rndCol;
 		div.addEventListener('mouseover', eChange);
@@ -58,8 +63,14 @@
 		const rndCol = 'rgb(' + r + ',' + g + ',' + b + ')';
 		const rndColComp = 'rgb(' + (255-r) + ',' + (255-g) + ',' + (255-b) + ')';
 		
+		// change the background to the randome color
 		document.body.style.backgroundColor = rndCol;
-		e.target.style.backgroundColor = rndColComp;	
+		
+		// change the default text colour to the complement of the random color 
+		// to improve visibility
+		document.body.style.color = rndColComp;
+		//e.target.style.backgroundColor = rndColComp;	
+		
       }
 	  
 	  function eChange(e) {
@@ -75,18 +86,11 @@
         document.body.style.backgroundColor = rndCol;
       }
 
-      //btn.onmouseover = bgChange;
-	  //btn.onmouseout = bgChangeWhite;
+      //btn.addEventListener('mouseover', bgChange);
+	  //btn.addEventListener('mouseout', bgChange);
+	  btn.addEventListener('click', bgChange);
 	  
-	  btn.addEventListener('mouseover', bgChange);
-	  btn.addEventListener('mouseout', bgChange);
 	  
-	  //const divs = document.querySelectorAll('div');
-
-	  //for (let i = 0; i < divs.length; i++) {
-		//divs[i].addEventListener('click'), bgChange);
-	  //}
- 
 
 	  
 	  
